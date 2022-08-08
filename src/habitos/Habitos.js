@@ -1,38 +1,48 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
-import ProfilePic from "../assets/hamster.svg";
 import ContentHabitos from "./ContentHabitos";
+import AuthContext from "../contexts/AuthContext";
+import AddHabito from "./AddHabito";
 
 export default function Habitos() {
+  const { image, setImage } = useContext(AuthContext);
+  const [ clicked, setClicked] = useState(false);
   return (
     <>
-      <Header>
-        <span>TrackIt</span>
-        <img src={ProfilePic} alt="" />
-      </Header>
-      <Content>
-        <ContentHeader>
-          <span>Meus Hábitos</span>
-          <div>+</div>
-        </ContentHeader>
-        <ContentHabitos />
-      </Content>
-      <Footer>
-        <div></div>
-        <div></div>
-      </Footer>
+      <BackGround>
+        <Header>
+          <span>TrackIt</span>
+          <img src={image} alt="" />
+        </Header>
+        <Content>
+          <ContentHeader>
+            <span>Meus Hábitos</span>
+            <div onClick={() => setClicked(!clicked)}>+</div>
+          </ContentHeader>
+          <AddHabito show={clicked}/>
+          <ContentHabitos />
+        </Content>
+        <Footer>
+          <div></div>
+          <div></div>
+        </Footer>
+      </BackGround>
     </>
   );
 }
 
+const BackGround = styled.div`
+  background-color: #126ba5;
+`;
+
 const Header = styled.div`
+  box-sizing: border-box;
   width: 100%;
   height: 70px;
   display: flex;
   position: fixed;
   top: 0px;
   left: 0px;
-  background-color: #126ba5;
   align-items: center;
   justify-content: space-between;
   padding: 0 18px;

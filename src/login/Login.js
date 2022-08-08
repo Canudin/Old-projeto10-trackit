@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../contexts/AuthContext";
 import axios from "axios";
 import imgLogo from "../assets/TrackIt.png";
 
@@ -10,6 +11,8 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const { token, setToken } = useContext(AuthContext);
+  const { image, setImage } = useContext(AuthContext);
 
   function handleForm(event) {
     event.preventDefault();
@@ -25,8 +28,9 @@ export default function Login() {
       login
     );
     promise.then((answer) => {
-      const { id, name, image, email, password, token } = answer.data;
-      // navigate("/habitos");
+      setToken(answer.data.token);
+      setImage(answer.data.image);
+      navigate("/habitos");
     });
     promise.catch(() => alert("Login inválido!"));
   }
