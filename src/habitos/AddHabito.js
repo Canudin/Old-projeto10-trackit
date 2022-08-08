@@ -60,7 +60,8 @@ const NovoHabito = styled.div`
 
 const DiaHabito = styled.div`
   display: flex;
-  background-color: orange;
+  width: 240px;
+  margin-left: 18px;
   
   div{
   display: flex;
@@ -73,6 +74,6 @@ const DiaHabito = styled.div`
   background-color: white;
   border: 1px solid #d4d4d4;
     border-radius: 5px;
-  margin: 8px 4px 0 4px;
+  margin: 8px 2px 0 2px;
   }
 `;
